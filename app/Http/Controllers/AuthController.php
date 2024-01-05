@@ -13,25 +13,27 @@ class AuthController extends Controller
 
     public function postlogin(Request $request)
     {
-        // $email=$request->email;
-        // $password=$request->password;
-        // $credentials = [
-        //     'email' => $email,
-        //     'password' => $password
-        // ];
-        // $dologin=Auth::attempt($credentials);
-        // if($dologin){
-        //     return redirect()->route('menu');
-        // }
-        // else{
-        //     return redirect()->route('login')->with('fail','Wrong Email or Password');
-        // }
+        $email=$request->email;
+        $password=$request->password;
+        $credentials = [
+            'email' => $email,
+            'password' => $password
+        ];
+
+        $dologin=Auth::attempt($credentials);
+        
+        if($dologin){
+            return redirect()->route('menu');
+        }
+        else{
+            return redirect()->route('login')->with('fail','Wrong Email or Password');
+        }
 
         return redirect()->route('menu');
     }
 
     public function logout(Request $request){
-        // Auth::logout();
+        Auth::logout();
         return redirect()->route('login')->with('status','Success Logout');
     }
 }
