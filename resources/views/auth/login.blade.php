@@ -36,13 +36,12 @@
                     @endif
 
                     <div class="input_box">
-                        <input type="email" placeholder="Enter your email / username" required />
+                        <input type="email" placeholder="Enter your email / username" required name="email" />
                         <i class="uil uil-envelope-alt email"></i>
                     </div>
                     <div class="input_box">
-                        <input type="password" placeholder="Enter your password" required />
+                        <input type="password" placeholder="Enter your password" required name="password" />
                         <i class="uil uil-lock password"></i>
-                        <i class="uil uil-eye-slash pw_hide"></i>
                     </div>
                     <div class="option_field">
                         <span class="checkbox">

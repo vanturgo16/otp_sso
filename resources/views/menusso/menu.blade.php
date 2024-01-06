@@ -152,7 +152,7 @@
                         </a>
                     </div>
                     <div class="custom-col mb-4 px-2 py-2">
-                        <a href="" target="_blank" class="card-link">
+                        <a href="{{ url('http://127.0.0.1:7000/dashboard') }}" target="_blank" class="card-link">
                             <div class="custom-card">
                                 <div class="container-icon">
                                     <img src="{{ asset('images/icon/configuration.png') }}" class="card-icon" alt="Icon">
