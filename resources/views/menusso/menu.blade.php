@@ -56,14 +56,14 @@
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/userbg.png') }}"
                                 alt="Header Avatar">
-                            <span class="d-none d-xl-inline-block ms-1 fw-medium">Satria Mahatir</span>
+                            <span class="d-none d-xl-inline-block ms-1 fw-medium">{{ Auth::user()->name }}</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
-                            {{-- IF Admin  --}}
+                            @if (Auth::user()->is_superadmin == 1)
                             <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#manageSSO"><i class="mdi mdi-cogs font-size-16 align-middle me-1"></i> Manage SSO</a>
                             <div class="dropdown-divider"></div>
-                            {{-- IF Admin --}}
+                            @endif
                             <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#logout"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                         </a>
                     </div>
                     <div class="custom-col mb-4 px-2 py-2">
-                        <a href="" target="_blank" class="card-link">
+                        <a href="{{ url('http://127.0.0.1:7000/dashboard') }}" target="_blank" class="card-link">
                             <div class="custom-card">
                                 <div class="container-icon">
                                     <img src="{{ asset('images/icon/configuration.png') }}" class="card-icon" alt="Icon">
@@ -332,7 +332,7 @@
     // Get the greeting text element
     const greetingElement = document.getElementById('greetingText');
     // Set the text content based on the time
-    greetingElement.innerHTML = generateGreeting(currentHour) + ', <b>Satria Mahatir</b>';
+    greetingElement.innerHTML = generateGreeting(currentHour) + ', <b>{{ Auth::user()->name }}</b>';
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
