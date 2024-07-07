@@ -92,7 +92,7 @@
                 <div class="custom-row d-flex justify-content-center align-items-center">
 
                     <div class="custom-col mb-4 px-2 py-2">
-                        <a href="" target="_blank" class="card-link">
+                        <a href="{{ url('http://127.0.0.1:9040/dashboard') }}" target="_blank" class="card-link">
                             <div class="custom-card">
                                 <div class="container-icon">
                                     <img src="{{ asset('images/icon/purchasing.png') }}" class="card-icon" alt="Icon">
@@ -104,19 +104,19 @@
                         </a>
                     </div>
                     <div class="custom-col mb-4 px-2 py-2">
-                        <a href="" target="_blank" class="card-link">
+                        <a href="{{ url('http://127.0.0.1:9030/dashboard') }}" target="_blank" class="card-link">
                             <div class="custom-card">
                                 <div class="container-icon">
                                     <img src="{{ asset('images/icon/ppic.png') }}" class="card-icon" alt="Icon">
                                 </div>
                                 <div class="container-text" style="display: none;">
-                                    <p class="card-text">PPIC</p>
+                                    <p class="card-text">PPIC & Warehouse</p>
                                 </div>
                             </div>
                         </a>
                     </div>
                     <div class="custom-col mb-4 px-2 py-2">
-                        <a href="" target="_blank" class="card-link">
+                        <a href="{{ url('http://127.0.0.1:9020/dashboard') }}" target="_blank" class="card-link">
                             <div class="custom-card">
                                 <div class="container-icon">
                                     <img src="{{ asset('images/icon/production.png') }}" class="card-icon" alt="Icon">
@@ -128,7 +128,7 @@
                         </a>
                     </div>
                     <div class="custom-col mb-4 px-2 py-2">
-                        <a href="" target="_blank" class="card-link">
+                        <a href="{{ url('http://127.0.0.1:9010/dashboard') }}" target="_blank" class="card-link">
                             <div class="custom-card">
                                 <div class="container-icon">
                                     <img src="{{ asset('images/icon/marketing.png') }}" class="card-icon" alt="Icon">
@@ -140,7 +140,7 @@
                         </a>
                     </div>
                     <div class="custom-col mb-4 px-2 py-2">
-                        <a href="" target="_blank" class="card-link">
+                        <a href="{{ url('http://127.0.0.1:9000/dashboard') }}" target="_blank" class="card-link">
                             <div class="custom-card">
                                 <div class="container-icon">
                                     <img src="{{ asset('images/icon/accounting.png') }}" class="card-icon" alt="Icon">
