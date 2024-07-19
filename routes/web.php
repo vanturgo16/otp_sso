@@ -16,6 +16,7 @@ use App\Http\Controllers\MenuController;
 */
 
 //Route Login
+Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('auth/login', [AuthController::class, 'postlogin'])->name('postlogin')->middleware("throttle:5,2");
 
