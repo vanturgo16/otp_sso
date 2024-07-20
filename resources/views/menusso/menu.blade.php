@@ -61,8 +61,8 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             {{-- IF Admin  --}}
-                            <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#manageSSO"><i class="mdi mdi-cogs font-size-16 align-middle me-1"></i> Manage SSO</a>
-                            <div class="dropdown-divider"></div>
+                            {{-- <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#manageSSO"><i class="mdi mdi-cogs font-size-16 align-middle me-1"></i> Manage SSO</a>
+                            <div class="dropdown-divider"></div> --}}
                             {{-- IF Admin --}}
                             <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#logout"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
                         </div>
