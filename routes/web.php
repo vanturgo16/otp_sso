@@ -25,21 +25,23 @@ Route::post('auth/login', [AuthController::class, 'postlogin'])->name('postlogin
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/menu', [MenuController::class, 'index'])->name('menu');
-        // Permissions route group
-        Route::controller(PermissionController::class)->group(function () {
-            Route::get('/permission', 'index')->name('permission.index');
-            Route::get('/permission/json', 'jsonpermission')->name('permission.json');
-            Route::get('/permission/create', 'create')->name('permission.create');
-            Route::post('/permission', 'store')->name('permission.store');
-        });
-    
-        // Role access management route group
-        Route::controller(RoleController::class)->group(function () {
-            Route::get('/role', 'index')->name('role.index');
-            Route::get('/role/create', 'create')->name('role.create');
-            Route::post('/role', 'store')->name('role.store');
-            Route::get('/role/edit/{role}', 'edit')->name('role.edit');
-            Route::patch('/role/update/{role}', 'update')->name('role.update');
-        });
+    Route::group(['middleware' => ['clear.permission.cache']], function () {
+        Route::get('/menu', [MenuController::class, 'index'])->name('menu');
+            // Permissions route group
+            Route::controller(PermissionController::class)->group(function () {
+                Route::get('/permission', 'index')->name('permission.index');
+                Route::get('/permission/json', 'jsonpermission')->name('permission.json');
+                Route::get('/permission/create', 'create')->name('permission.create');
+                Route::post('/permission', 'store')->name('permission.store');
+            });
+        
+            // Role access management route group
+            Route::controller(RoleController::class)->group(function () {
+                Route::get('/role', 'index')->name('role.index');
+                Route::get('/role/create', 'create')->name('role.create');
+                Route::post('/role', 'store')->name('role.store');
+                Route::get('/role/edit/{role}', 'edit')->name('role.edit');
+                Route::patch('/role/update/{role}', 'update')->name('role.update');
+            });
+    });
 });
