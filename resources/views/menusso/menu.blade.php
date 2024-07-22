@@ -166,8 +166,8 @@
                         </a>
                     </div>             
                     @endcan
-
-                    @can('Akunting')
+                         
+                    @can('Akunting_dashboard')
                     <div class="custom-col mb-4 px-2 py-2">
                         @if (app()->environment('production'))
                             <a href="{{ url('https://accounting.olefinatifaplas.my.id/dashboard') }}" target="_blank" class="card-link">
