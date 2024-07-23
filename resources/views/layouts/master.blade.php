@@ -172,6 +172,7 @@
 
             <!-- Start Page-content -->
             @yield('konten')
+            @include('sweetalert::alert')
             <!-- End Page-content -->
 
 
