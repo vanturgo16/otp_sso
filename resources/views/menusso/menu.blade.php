@@ -21,6 +21,8 @@
     <link href="{{ asset('assets/css/custom.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    
+
     <div id="layout-wrapper">
         <header id="page-topbar">
             <div class="navbar-header">
