@@ -54,15 +54,21 @@
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item bg-light-subtle border-start border-end" id="page-header-user-dropdown"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="rounded-circle header-profile-user" src="{{ Storage::url('public/staff/'.Auth::user()->profile_photo_path.'') }}" alt="{{ Auth::user()->name }}"/>
+                        @error('profile_photo_path')
+                        <div class="invalid-feedback" style="display: block">
                             <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/userbg.png') }}"
-                                alt="Header Avatar">
+                            alt="Header Avatar">
+                        </div>
+                        @enderror
+                          
                             <span class="d-none d-xl-inline-block ms-1 fw-medium">{{ Auth::user()->name }}</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             {{-- IF Admin  --}}
-                            {{-- <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#manageSSO"><i class="mdi mdi-cogs font-size-16 align-middle me-1"></i> Manage SSO</a>
-                            <div class="dropdown-divider"></div> --}}
+                            <a class="dropdown-item" href="/profil" data-bs-target="#manageSSO"><i class="mdi mdi-cogs font-size-16 align-middle me-1"></i> Manage Akun</a>
+                            <div class="dropdown-divider"></div>
                             {{-- IF Admin --}}
                             <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#logout"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
                         </div>
@@ -110,7 +116,7 @@
                     </div>
                     @endcan
 
-                    @can('PPIC')
+                    {{-- @can('PPIC') --}}
                     <div class="custom-col mb-4 px-2 py-2">
                         @if (app()->environment('production'))
                                 <a href="{{ url('https://ppic.olefinatifaplas.my.id/dashboard') }}" target="_blank" class="card-link">
@@ -127,7 +133,7 @@
                             </div>
                         </a>
                     </div>
-                    @endcan
+                    {{-- @endcan --}}
 
                     @can('Produksi')
                     <div class="custom-col mb-4 px-2 py-2">
