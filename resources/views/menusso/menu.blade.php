@@ -118,7 +118,7 @@
                     </div>
                     @endcan
 
-                    {{-- @can('PPIC') --}}
+                    @can('PPIC')
                     <div class="custom-col mb-4 px-2 py-2">
                         @if (app()->environment('production'))
                                 <a href="{{ url('https://ppic.olefinatifaplas.my.id/dashboard') }}" target="_blank" class="card-link">
@@ -135,7 +135,7 @@
                             </div>
                         </a>
                     </div>
-                    {{-- @endcan --}}
+                    @endcan
 
                     @can('Produksi')
                     <div class="custom-col mb-4 px-2 py-2">
