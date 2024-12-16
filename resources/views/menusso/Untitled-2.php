@@ -21,14 +21,12 @@
     <link href="{{ asset('assets/css/custom.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    
-
     <div id="layout-wrapper">
         <header id="page-topbar">
             <div class="navbar-header">
                 <div class="d-flex">
                     <!-- LOGO -->
-                    <a href="" class="logo logo-dark">
+                    <a href="index.html" class="logo logo-dark">
                         <span class="logo-sm">
                             <img src="{{ asset('images/logo.png') }}" alt="" height="60">
                         </span>
@@ -37,7 +35,7 @@
                         </span>
                     </a>
 
-                    <a href="" class="logo logo-light">
+                    <a href="index.html" class="logo logo-light">
                         <span class="logo-sm">
                             <img src="{{ asset('images/logo.png') }}" alt="" height="60">
                         </span>
@@ -56,20 +54,14 @@
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item bg-light-subtle border-start border-end" id="page-header-user-dropdown"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="rounded-circle header-profile-user" src="{{ Storage::url('public/staff/'.Auth::user()->profile_photo_path.'') }}" alt="{{ Auth::user()->name }}"/>
-                        @error('profile_photo_path')
-                        <div class="invalid-feedback" style="display: block">
                             <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/userbg.png') }}"
-                            alt="Header Avatar">
-                        </div>
-                        @enderror
-                          
-                            <span class="d-none d-xl-inline-block ms-1 fw-medium">{{ Auth::user()->name }}</span>
+                                alt="Header Avatar">
+                            <span class="d-none d-xl-inline-block ms-1 fw-medium">Satria Mahatir</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             {{-- IF Admin  --}}
-                            <a class="dropdown-item" href="/profil" data-bs-target="#manageSSO"><i class="mdi mdi-cogs font-size-16 align-middle me-1"></i> Manage Akun</a>
+                            <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#manageSSO"><i class="mdi mdi-cogs font-size-16 align-middle me-1"></i> Manage SSO</a>
                             <div class="dropdown-divider"></div>
                             {{-- IF Admin --}}
                             <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#logout"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
@@ -174,8 +166,8 @@
                         </a>
                     </div>             
                     @endcan
-                         
-                    @can('Akunting_dashboard')
+
+                    @can('Akunting')
                     <div class="custom-col mb-4 px-2 py-2">
                         @if (app()->environment('production'))
                             <a href="{{ url('https://accounting.olefinatifaplas.my.id/dashboard') }}" target="_blank" class="card-link">
@@ -380,7 +372,7 @@
     // Get the greeting text element
     const greetingElement = document.getElementById('greetingText');
     // Set the text content based on the time
-    greetingElement.innerHTML = generateGreeting(currentHour) + ', <b>{{ Auth::user()->name }}</b>';
+    greetingElement.innerHTML = generateGreeting(currentHour) + ', <b>Satria Mahatir</b>';
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
