@@ -54,19 +54,17 @@
                         </button>
                     </div>
                     <div class="dropdown d-inline-block">
-                        <button type="button" class="btn header-item bg-light-subtle border-start border-end" id="page-header-user-dropdown"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="rounded-circle header-profile-user" src="{{ Storage::url('public/staff/'.Auth::user()->profile_photo_path.'') }}" alt="{{ Auth::user()->name }}"/>
-                        @error('profile_photo_path')
-                        <div class="invalid-feedback" style="display: block">
-                            <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/userbg.png') }}"
-                            alt="Header Avatar">
-                        </div>
-                        @enderror
-                          
-                            <span class="d-none d-xl-inline-block ms-1 fw-medium">{{ Auth::user()->name }}</span>
-                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                        <button type="button" class="btn header-item bg-light-subtle border-start border-end" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @php use Illuminate\Support\Facades\File; use Illuminate\Support\Facades\Storage; $defaultImagePath = asset('images/user.png'); @endphp
+                            @php $userImagePath = Storage::url('public/staff/'.Auth::user()->profile_photo_path.''); @endphp
+                            @if(File::exists($userImagePath))
+                                <img class="rounded-circle header-profile-user" src="{{ $userImagePath }}" alt="{{ Auth::user()->name }}"/>
+                            @else
+                                <img class="rounded-circle header-profile-user" src="{{ $defaultImagePath }}" alt="Header Avatar">
+                            @endif
+                            <span class="d-none d-xl-inline-block ms-1 fw-medium">{{ Auth::user()->name }}</span> <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
+
                         <div class="dropdown-menu dropdown-menu-end">
                             {{-- IF Admin  --}}
                             <a class="dropdown-item" href="/profil" data-bs-target="#manageSSO"><i class="mdi mdi-cogs font-size-16 align-middle me-1"></i> Manage Akun</a>
@@ -213,6 +211,26 @@
                         </a>
                     </div>                    
                     @endcan
+
+                    {{-- @can('Configuration') --}}
+                    <div class="custom-col mb-4 px-2 py-2">
+
+                        @if (app()->environment('production'))
+                            <a href="{{ url('https://qc.olefinatifaplas.my.id/dashboard') }}" target="_blank" class="card-link">
+                        @else
+                            <a href="{{ url('http://127.0.0.1:7000/dashboard') }}" target="_blank" class="card-link">
+                        @endif
+                            <div class="custom-card">
+                                <div class="container-icon">
+                                    <img src="{{ asset('images/icon/qualitycontrol.png') }}" class="card-icon" alt="Icon">
+                                </div>
+                                <div class="container-text" style="display: none;">
+                                    <p class="card-text">Quality Control</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>                    
+                    {{-- @endcan --}}
                 </div>        
             </div>
         </div>
