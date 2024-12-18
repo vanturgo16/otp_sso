@@ -3,19 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\File;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
 use App\Models\User;
 
 
-class ProfilController extends Controller
+class ProfilControllerOld extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+        //  $this->middleware(['permission:users.index|users.create|users.edit|users.delete']);
     }
     public function index()
     {
@@ -28,69 +30,73 @@ class ProfilController extends Controller
         $this->validate(
             $request,
             [
-                'password' => ['required', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]+$/'],
+                'password' => [
+                    'required',
+                    'min:8',
+                    'confirmed',
+                    'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]+$/'
+                ],
                 'current_password' => 'required|min:8',
             ],
             [
                 'password.regex' => 'Password harus mengandung setidaknya satu huruf kecil, satu huruf besar, satu angka, dan satu karakter khusus.'
             ]
         );
+
         if (!Hash::check($request->input('current_password'), Auth::user()->password)) {
-            return redirect()->back()->withErrors(['current_password' => 'Password saat ini salah.']);
+            return back()->withErrors(['current_password' => 'Password saat ini salah.']);
         }
 
         $user = User::find(Auth::user()->id);
+
         if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
             $user->password_update = now();
             $user->save();
         }
+
         if ($user) {
-            return redirect()->back()->with(['status' => 'Password Berhasil Di Update']);
+
+            return redirect('/profil')->with('status', 'Password Berhasil Di Update');
         } else {
-            return redirect()->back()->with(['error' => 'Password Gagal Di Update']);
+
+            return redirect('/profil')->with('status', 'Password Gagal Di Update');
         }
     }
+
 
     public function update_image(Request $request)
     {
         $this->validate($request, [
             'name' => 'required',
+            // 'email' => 'required|email|unique:users,email,' . Auth::user()->id,
             'profile_photo_path' => 'image|mimes:png,jpg,jpeg|max:2000',
         ]);
 
         $user = User::find(Auth::user()->id);
 
-        // Update name
+        // Update name and email
         $user->name = $request->input('name');
+        // $user->email = $request->input('email');
         $user->save();
 
         // Update profile image if provided
         if ($request->hasFile('profile_photo_path')) {
-            // Delete File Before
-            if ($user->profile_photo_path && File::exists(public_path('staff/' . $user->profile_photo_path))) {
-                File::delete(public_path('staff/' . $user->profile_photo_path));
-            }
-            // Define the storage path
-            $folderPath = public_path('staff');
-            // Create the folder if it doesn't exist
-            if (!File::exists($folderPath)) {
-                File::makeDirectory($folderPath, 0755, true);
-            }
+            Storage::disk('local')->delete('public/staff/' . $user->profile_photo_path);
 
-            // STORE FILE
             $profile_photo_path = $request->file('profile_photo_path');
-            $fileName = $profile_photo_path->hashName();
-            $profile_photo_path->move('staff', $fileName);
-            // Update DB
-            $user->profile_photo_path = $fileName;
+            $profile_photo_path->storeAs('public/staff', $profile_photo_path->hashName());
+
+            $user->profile_photo_path = $profile_photo_path->hashName();
             $user->save();
         }
 
-        if ($user) {
-            return redirect()->back()->with(['status' => 'Profil Berhasil Di Update']);
-        } else {
-            return redirect()->back()->with(['error' => 'Profil Gagal Di Update']);
-        }
+        // if ($user) {
+        //     Alert::success('success', 'Berhasil Di Update');
+        // } else {
+        //     Alert::error('error', 'Gagal Di Update');
+        // }
+
+        return redirect('/profil')->with('status', 'Password Berhasil Di Update');
     }
 }

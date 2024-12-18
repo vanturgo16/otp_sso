@@ -28,12 +28,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => ['clear.permission.cache']], function () {
         Route::get('/menu', [MenuController::class, 'index'])->name('menu');
-        
-       
-    Route::controller(ProfilController::class)->group(function () {
-        Route::get('/profil', 'index')->name('profil');
-        Route::patch('/profil/update', 'update');
-        Route::patch('/foto-profil/update', 'update_image');
+
+        Route::controller(ProfilController::class)->group(function () {
+            Route::get('/profil', 'index')->name('profil');
+            Route::patch('/profil/update', 'update')->name('profil.update');
+            Route::patch('/foto-profil/update', 'update_image')->name('profil.updateFoto');
+        });
     });
-});
 });
